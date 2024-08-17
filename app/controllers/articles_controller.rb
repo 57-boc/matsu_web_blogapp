@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class ArticlesController < ApplicationController
   #ApplicationControllerを継承している
   def index
     # render 'home/index'
@@ -6,8 +6,5 @@ class HomeController < ApplicationController
     # HomeControllerの中のindexはrender 'home/index'に設定されているので、書かなくてもよい
     @article = Article.first
     # Articleテーブルの一番最初をとってくる
-  end
-
-  def about
   end
 end
