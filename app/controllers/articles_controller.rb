@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    # titleとcontentの情報が入った@articleを作成
+    # article_paramsでtitleとcontentの情報が入った@articleを作成
     if @article.save
       # @articleを保存したら
       redirect_to article_path(@article), notice: '保存できたよ'
@@ -34,6 +34,24 @@ class ArticlesController < ApplicationController
       # flashのkeyにerrorを入れvalueに'保存に失敗しました'を入れる
       render :new
       # new.html.erbを表示
+    end
+  end
+
+  def edit
+    @article = Article.find(params[:id])
+    # パラメータidを持つ記事を探してくる
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      # article_paramsでtitleとcontentの情報が入った@articleを保存出来た場合
+      redirect_to article_path(@article), notice: '更新できたよ'
+    else
+      flash.now[:error] = '更新できませんでした'
+      # flashのkeyにerrorを入れvalueに'保存に失敗しました'を入れる
+      render :edit
+      # edit.html.erbを表示
     end
   end
 
