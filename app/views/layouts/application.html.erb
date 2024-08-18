@@ -24,6 +24,15 @@
         </div><!-- /.dropdown-content -->
       </div><!-- /.dropdown -->
     </header><!-- /.header -->
+    <% if flash.present? %>
+      <!-- flashがnilでないとき -->
+      <div class="flash">
+        <% flash.each do |key, value| %>
+          <!-- flashはハッシュ形式 -->
+          <div class="<%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,4 +1,10 @@
 <div class="container">
+  <ul>
+    <% @article.errors.full_messages.each do |message| %>
+      <!--@article.errors.full_messagesにすべてのエラーメッセージが配列で入っている-->
+      <li><%= message %></li>
+    <% end %>
+  </ul>
   <%= form_with(model: @article, url: articles_path, method: 'post', local: true) do |f| %>
     <!--formで 空の@articleの中に入力値を入れ、articles_pathにpostリクエストを送る-->
     <div>

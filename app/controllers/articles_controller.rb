@@ -26,10 +26,14 @@ class ArticlesController < ApplicationController
     # titleとcontentの情報が入った@articleを作成
     if @article.save
       # @articleを保存したら
-      redirect_to article_path(@article)
-      #保存した記事のページに飛ぶ
+      redirect_to article_path(@article), notice: '保存できたよ'
+      #保存した記事のページに飛ぶ notice(flashにはerrorとnoticeの2種類がある)
+      # notice: がkey '保存できたよ'がvalue
     else
+      flash.now[:error] = '保存に失敗しました'
+      # flashのkeyにerrorを入れvalueに'保存に失敗しました'を入れる
       render :new
+      # new.html.erbを表示
     end
   end
 
