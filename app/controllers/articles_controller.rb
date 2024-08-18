@@ -17,5 +17,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @article = Article.new
+    # 記事を入れる入れ物を作成
   end
 end
