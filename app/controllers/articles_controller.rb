@@ -33,9 +33,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  # Strong paramaterはprivateで作成する
+  # class Articleを更新するので名前はarticle_paramsとする決まり
   private
   def article_params
     params.require(:article).permit(:title, :content)
-    # 投稿を受け取ったときtitleとcontentを抜き出してくる
+    # article（必須）を受け取ったときtitleとcontentだけを保存する
   end
 end
