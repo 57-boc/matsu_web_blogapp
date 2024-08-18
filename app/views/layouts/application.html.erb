@@ -9,6 +9,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!-- スマホ対応 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -22,6 +24,15 @@
         </div><!-- /.dropdown-content -->
       </div><!-- /.dropdown -->
     </header><!-- /.header -->
+    <% if flash.present? %>
+      <!-- flashがnilでないとき -->
+      <div class="flash">
+        <% flash.each do |key, value| %>
+          <!-- flashはハッシュ形式 -->
+          <div class="<%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
