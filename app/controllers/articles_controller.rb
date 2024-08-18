@@ -20,4 +20,22 @@ class ArticlesController < ApplicationController
     @article = Article.new
     # 記事を入れる入れ物を作成
   end
+
+  def create
+    @article = Article.new(article_params)
+    # titleとcontentの情報が入った@articleを作成
+    if @article.save
+      # @articleを保存したら
+      redirect_to article_path(@article)
+      #保存した記事のページに飛ぶ
+    else
+      render :new
+    end
+  end
+
+  private
+  def article_params
+    params.require(:article).permit(:title, :content)
+    # 投稿を受け取ったときtitleとcontentを抜き出してくる
+  end
 end
