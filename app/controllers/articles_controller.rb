@@ -37,6 +37,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def edit
+    @article = Article.find(params[:id])
+    # idのパラメータを持つ記事を探してくる
+  end
+
   # Strong paramaterはprivateで作成する
   # class Articleを更新するので名前はarticle_paramsとする決まり
   private
