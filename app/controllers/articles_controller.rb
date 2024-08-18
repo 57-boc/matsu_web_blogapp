@@ -15,4 +15,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     # params[:id]でURLで指定されたidが取得できる
   end
+
+  def new
+  end
 end
