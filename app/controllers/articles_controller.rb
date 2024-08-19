@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :set_artivcle, only: [:show, :edit, :update]
+  # show, edit, updateのときだけ先にset_artivcleを実行する
+
   #ApplicationControllerを継承している
   def index
     # render 'home/index'
@@ -12,8 +15,6 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
-    # params[:id]でURLで指定されたidが取得できる
   end
 
   def new
@@ -38,12 +39,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
-    # パラメータidを持つ記事を探してくる
   end
 
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       # article_paramsでtitleとcontentの情報が入った@articleを保存出来た場合
       redirect_to article_path(@article), notice: '更新できたよ'
@@ -70,5 +68,10 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :content)
     # article（必須）を受け取ったときtitleとcontentだけを保存する
+  end
+
+  def set_artivcle
+    @article = Article.find(params[:id])
+    # パラメータidを持つ記事を探してくる
   end
 end
