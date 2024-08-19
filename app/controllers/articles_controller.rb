@@ -47,12 +47,21 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       # article_paramsでtitleとcontentの情報が入った@articleを保存出来た場合
       redirect_to article_path(@article), notice: '更新できたよ'
+      # @articleのページに遷移してメッセージを表示
     else
       flash.now[:error] = '更新できませんでした'
       # flashのkeyにerrorを入れvalueに'保存に失敗しました'を入れる
       render :edit
       # edit.html.erbを表示
     end
+  end
+
+  def destroy
+    article = Article.find(params[:id])
+    article.destroy!
+    # articleを削除する !を付けることで削除されなかったとき例外処理が発生する
+    redirect_to root_path, notice: '削除できたよ'
+    # rootページに遷移してメッセージを表示
   end
 
   # Strong paramaterはprivateで作成する
