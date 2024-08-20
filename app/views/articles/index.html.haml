@@ -1,0 +1,10 @@
+.container
+  = render 'tabs'
+  - @articles.each do |article|
+    = render 'article', article: article
+    / article.html.erbのarticleにarticleをいれなさい
+  = link_to new_article_path do
+    .float_btn
+      %i.fa.fa-plus
+      / /.fa-plus
+    / /.float_btn
