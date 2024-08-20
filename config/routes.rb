@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # rootを articles#indexにしろということ
 
-  resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :articles
+  # ↓全部使われているのでonlyを使う必要がない
+  # resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
   # resourcesでURLを作成してくれる（articlesのshow, new, create, edit, destroyアクション関係のURLを作成してくれる）
 
   # get '/about' => 'home#about'
