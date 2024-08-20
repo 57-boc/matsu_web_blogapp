@@ -27,9 +27,10 @@ gem 'jbuilder', '~> 2.7'
 
 # ダミーデータ作成
 gem 'faker'
-
 # haml
 gem 'hamlit'
+# annotate
+gem 'annotate'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
