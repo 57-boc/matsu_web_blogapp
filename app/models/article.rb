@@ -15,6 +15,8 @@ class Article < ApplicationRecord
   # validates titleの入力チェック 2文字以上の入力100文字以下
   validates :content, presence: true
   validates :content, length: {minimum: 10}
+  validates :content, uniqueness: true
+  # 内容がユニークかどうか調べる
 
   def display_created_at
     # 日時の表示変更
