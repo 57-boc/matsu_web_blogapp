@@ -20,10 +20,24 @@ class Article < ApplicationRecord
   validates :content, uniqueness: true
   # 内容がユニークかどうか調べる
 
+  validate :validate_title_and_content_length
+  # validate(sがついてない)は独自のルール
+
   def display_created_at
     # 日時の表示変更
     I18n.l(self.created_at, format: :default)
     # I18n.l(article.created_at, format: :default)
     # articleの部分はselfで受け取れる
   end
+
+  private
+  def validate_title_and_content_length
+    char_count = self.title.length + self.content.length
+    errors.add(:content, '100文字以上じゃないとダメ！') unless char_count > 100
+    # 100文字以上入力がされなかったときエラーを表示する
+    # unless char_count > 100
+      # errors.add(:content, '100文字以上じゃないとダメ！')
+    # end  と同じ
+  end
+
 end
