@@ -20,14 +20,18 @@
             = image_tag 'back.svg', class: 'header_back'
         %p.header_pageTitle BlogApp
         / /.header_pageTitle
+      - if user_signed_in?
+        //ユーザーがサインインしていたら
+        .dropdown
+          = image_tag 'default-avatar.png', class: 'header_avatar dropbtn'
+          .dropdown-content
+            %a{:href => "#"} プロフィール
+            = link_to 'ログアウト', destroy_user_session_path, data: {method: 'delete'}
+          / /.dropdown-content
+        / /.dropdown
+      - else
+        = link_to 'ログイン', new_user_session_path, class: 'header_loginBtn'
       / /.header_logos
-      .dropdown
-        = image_tag 'default-avatar.png', class: 'header_avatar dropbtn'
-        .dropdown-content
-          %a{:href => "#"} プロフィール
-          %a{:href => "#"} ログアウト
-        / /.dropdown-content
-      / /.dropdown
     / /.header
     - if flash.present?
       / flashがnilでないとき
