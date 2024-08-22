@@ -11,7 +11,10 @@
 class Article < ApplicationRecord
   validates :title, presence: true
   # validates titleの入力チェック presence(入力されているか)
+  validates :title, length: {minimum: 2, maximum: 100}
+  # validates titleの入力チェック 2文字以上の入力100文字以下
   validates :content, presence: true
+  validates :content, length: {minimum: 10}
 
   def display_created_at
     # 日時の表示変更
