@@ -2,6 +2,10 @@ class ArticlesController < ApplicationController
   before_action :set_artivcle, only: [:show, :edit, :update]
   # show, edit, updateのときだけ先にset_artivcleを実行する
 
+  # deviseが用意してくれているauthenticate_user!
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  # ログインしていないと:new, :create, :edit, :update, :destroyの機能を使えないようにする
+
   #ApplicationControllerを継承している
   def index
     # render 'home/index'
