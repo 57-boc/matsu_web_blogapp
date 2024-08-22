@@ -13,6 +13,8 @@ class Article < ApplicationRecord
   # validates titleの入力チェック presence(入力されているか)
   validates :title, length: {minimum: 2, maximum: 100}
   # validates titleの入力チェック 2文字以上の入力100文字以下
+  validates :title, format: {with: /\A(?!\@)/}
+  # validates titleの入力チェック 先頭は@から始まったらダメ
   validates :content, presence: true
   validates :content, length: {minimum: 10}
   validates :content, uniqueness: true
