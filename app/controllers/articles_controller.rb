@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_artivcle, only: [:show, :edit, :update]
+  before_action :set_artivcle, only: [:show]
   # show, edit, updateのときだけ先にset_artivcleを実行する
 
   # deviseが用意してくれているauthenticate_user!
@@ -22,12 +22,15 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = current_user.articles.build
+    # current_userで現在ログインしているユーザーをとってくる 関連性がある場合はbuildを使う(動きはnewと同じ)
+    # @article = Article.new
     # 記事を入れる入れ物を作成
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.build(article_params)
+    # @article = Article.new(article_params)
     # article_paramsでtitleとcontentの情報が入った@articleを作成
     if @article.save
       # @articleを保存したら
@@ -43,9 +46,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    @article = current_user.articles.find(params[:id])
+    # カレントユーザーのarticleからパラメータidを持つ記事を探してくる
   end
 
   def update
+    @article = current_user.articles.find(params[:id])
     if @article.update(article_params)
       # article_paramsでtitleとcontentの情報が入った@articleを保存出来た場合
       redirect_to article_path(@article), notice: '更新できたよ'
@@ -59,7 +65,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    article = Article.find(params[:id])
+    article = current_user.articles.find(params[:id])
+    # article = Article.find(params[:id])
     article.destroy!
     # articleを削除する !を付けることで削除されなかったとき例外処理が発生する
     redirect_to root_path, notice: '削除できたよ'

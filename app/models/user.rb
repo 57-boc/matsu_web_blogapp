@@ -21,4 +21,19 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :articles, dependent: :destroy
+  # Userがarticles(複数のArticleモデル)を持っている
+  # dependent: :destroy Userが削除されたときにUserのarticlesも削除する
+
+  def has_written?(article)
+    articles.exists?(id: article.id)
+    # current_user.articles.exists?でuserのarticleのなかに、このidの記事が存在するかチェック
+  end
+
+  # testsample@gmail.comがユーザのメールアドレスだった時
+  def display_name
+    self.email.split('@').first
+    # =>split('@')で['testsample','gmail.com']と配列にする
+  end
 end

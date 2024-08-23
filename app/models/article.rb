@@ -3,14 +3,19 @@
 # Table name: articles
 #
 #  id         :integer          not null, primary key
-#  content    :text
-#  title      :string
+#  content    :text             not null
+#  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
+#
+# Indexes
+#
+#  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
   validates :title, presence: true
-  # validates titleの入力チェック presence(入力されているか)
+  # validates titleの入力チェック presence: true(入力必須)
   validates :title, length: {minimum: 2, maximum: 100}
   # validates titleの入力チェック 2文字以上の入力100文字以下
   validates :title, format: {with: /\A(?!\@)/}
@@ -23,11 +28,18 @@ class Article < ApplicationRecord
   validate :validate_title_and_content_length
   # validate(sがついてない)は独自のルール
 
+  belongs_to :user
+  # Userモデルに紐づいている
+
   def display_created_at
     # 日時の表示変更
     I18n.l(self.created_at, format: :default)
     # I18n.l(article.created_at, format: :default)
     # articleの部分はselfで受け取れる
+  end
+
+  def author_name
+    user.display_name
   end
 
   private
