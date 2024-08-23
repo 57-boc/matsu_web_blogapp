@@ -22,12 +22,15 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = current_user.articles.build
+    # current_userで現在ログインしているユーザーをとってくる 関連性がある場合はbuildを使う(動きはnewと同じ)
+    # @article = Article.new
     # 記事を入れる入れ物を作成
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.build(article_params)
+    # @article = Article.new(article_params)
     # article_paramsでtitleとcontentの情報が入った@articleを作成
     if @article.save
       # @articleを保存したら
