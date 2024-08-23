@@ -28,6 +28,9 @@ class Article < ApplicationRecord
   validate :validate_title_and_content_length
   # validate(sがついてない)は独自のルール
 
+  belongs_to :user
+  # Userモデルに紐づいている
+
   def display_created_at
     # 日時の表示変更
     I18n.l(self.created_at, format: :default)
