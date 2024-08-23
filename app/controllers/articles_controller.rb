@@ -65,7 +65,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    article = Article.find(params[:id])
+    article = current_user.articles.find(params[:id])
+    # article = Article.find(params[:id])
     article.destroy!
     # articleを削除する !を付けることで削除されなかったとき例外処理が発生する
     redirect_to root_path, notice: '削除できたよ'
