@@ -30,4 +30,10 @@ class User < ApplicationRecord
     articles.exists?(id: article.id)
     # current_user.articles.exists?でuserのarticleのなかに、このidの記事が存在するかチェック
   end
+
+  # testsample@gmail.comがユーザのメールアドレスだった時
+  def display_name
+    self.email.split('@').first
+    # =>split('@')で['testsample','gmail.com']と配列にする
+  end
 end

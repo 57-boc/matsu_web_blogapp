@@ -13,6 +13,8 @@
       .card_detail
         = image_tag 'default-avatar.png'
         %div
-          %p cohki0305
+          - if article.user.present?
+            -# articleでuser情報があるとき
+            %p= article.user.display_name
           %p= article.display_created_at
           / I18nは国際化用のクラス
