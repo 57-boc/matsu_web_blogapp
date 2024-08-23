@@ -5,7 +5,8 @@
     %div
       %p cohki0305
       %p= @article.display_created_at
-    - if user_signed_in?
+    - if user_signed_in? && current_user.has_written?(@article)
+      -# ログインしている、かつ、自作のhas_written(user.rb)を使って記事を書いてるかチェック
       .article_detail_actions
         .dropdown
           = image_tag 'actions.svg', class: 'dropbtn'

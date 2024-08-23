@@ -25,4 +25,9 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   # Userがarticles(複数のArticleモデル)を持っている
   # dependent: :destroy Userが削除されたときにUserのarticlesも削除する
+
+  def has_written?(article)
+    articles.exists?(id: article.id)
+    # current_user.articles.exists?でuserのarticleのなかに、このidの記事が存在するかチェック
+  end
 end
