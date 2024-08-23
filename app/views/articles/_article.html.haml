@@ -13,8 +13,9 @@
       .card_detail
         = image_tag 'default-avatar.png'
         %div
-          - if article.user.present?
-            -# articleでuser情報があるとき
-            %p= article.user.display_name
+          -# - if article.user.present?
+            -# articleでuser情報があるとき=>完全に存在するように設定しなおしたので不要
+          -# %p= article.user.display_name=>自作のarthor_nameに変更
+          %p= article.author_name
           %p= article.display_created_at
           / I18nは国際化用のクラス
