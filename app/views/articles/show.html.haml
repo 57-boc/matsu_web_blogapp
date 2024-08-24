@@ -21,3 +21,9 @@
     = @article.content
   .article_heart
     = image_tag 'heart.svg'
+
+.container
+  = link_to new_article_comment_path(@article) do
+    -# コメントのnew画面に遷移する（引数:articleを渡さないとどの記事がわからない）
+    .btn-secondary 
+      コメントを追加

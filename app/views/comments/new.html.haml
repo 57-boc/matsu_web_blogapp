@@ -1,0 +1,13 @@
+.container
+  %ul
+    - @comment.errors.full_messages.each do |message|
+      / @comment.errors.full_messagesにすべてのエラーメッセージが配列で入っている
+      %li= message
+
+  = form_with(model: @comment, url: article_comments_path(@comment.article), local: true) do |f|
+    / formで 空の@commentの中に入力値を入れ、article_comments_pathにpostリクエストを送る
+    %div
+      = f.label :content, 'コメント内容'
+    %div
+      = f.text_area :content
+    = f.submit '保存', class: 'btn-primary'
