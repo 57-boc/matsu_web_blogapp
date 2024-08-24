@@ -19,6 +19,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @comments = @article.comments
+    # 表示している記事のcommentsをとってきて@commentsに入れる
   end
 
   def new
