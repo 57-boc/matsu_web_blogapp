@@ -4,11 +4,18 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # rootを articles#indexにしろということ
 
-  resources :articles
+  resources :articles do
+    resources :comments, only: [:new, :create]
+  end
+  # articlesそれぞれにcomments作成用のURLを作る
+
+  # resources :articles
   # ↓全部使われているのでonlyを使う必要がない
   # resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
   # resourcesでURLを作成してくれる（articlesのshow, new, create, edit, destroyアクション関係のURLを作成してくれる）
 
   # get '/about' => 'home#about'
   # ↑home#about はhome_controller.rbのaboutを実行しろということ
+
+
 end
