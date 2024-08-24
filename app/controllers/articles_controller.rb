@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.build(article_params)
+    # 保存に失敗したときrender :newで使うので@articleにしている
     # @article = Article.new(article_params)
     # article_paramsでtitleとcontentの情報が入った@articleを作成
     if @article.save
