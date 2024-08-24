@@ -28,6 +28,8 @@ class Article < ApplicationRecord
   validate :validate_title_and_content_length
   # validate(sがついてない)は独自のルール
 
+  has_many :comments, dependent: :destroy
+  # articleは複数のcommentを持っている dependent: :destroyはarticleが削除されたときcommentsも消える
   belongs_to :user
   # Userモデルに紐づいている
 
