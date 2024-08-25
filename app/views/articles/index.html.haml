@@ -1,8 +1,8 @@
 .container
   = render 'tabs'
   - @articles.each do |article|
-    = render 'article', article: article
-    / article.html.erbのarticleにarticleをいれなさい
+    = render 'commons/article', article: article
+    / commonsフォルダ内の_article.html.erbのarticleにarticleをいれなさい
   = link_to new_article_path do
     .float_btn
       %i.fa.fa-plus
