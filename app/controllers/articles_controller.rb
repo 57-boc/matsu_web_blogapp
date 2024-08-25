@@ -25,6 +25,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = current_user.articles.build
+    # user.rbでhas_many :articlesとしているから
     # current_userで現在ログインしているユーザーをとってくる 関連性がある場合はbuildを使う(動きはnewと同じ)
     # @article = Article.new
     # 記事を入れる入れ物を作成
