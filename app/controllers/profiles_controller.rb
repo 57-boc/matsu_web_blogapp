@@ -9,5 +9,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    @profile = current_user.build_profile
+    # has_oneで定義してあるのでbuildしたいときbuild_profileと書く
   end
 end
