@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   end
   # articlesそれぞれにcomments作成用のURLを作る
 
+  resource :profile, only: [:show, :edit, :update]
+  # profileは単数なのでindexは生成されない
+
   # resources :articles
   # ↓全部使われているのでonlyを使う必要がない
   # resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
