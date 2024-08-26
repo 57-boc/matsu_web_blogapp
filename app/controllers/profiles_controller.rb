@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.prepare_profile
     # user.rbで定義したメソッドprepare_profileを使う
     # @profile = current_user.profile || @profile = current_user.build_profile
-    # これをまとめると一行になる
+    # ↓これをまとめると一行になる
     # if current_user.profile.present?
     #   # current_userのprofileが存在するのであれば
     #   @profile = current_user.profile

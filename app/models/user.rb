@@ -37,8 +37,24 @@ class User < ApplicationRecord
 
   # testsample@gmail.comがユーザのメールアドレスだった時
   def display_name
-    self.email.split('@').first
-    # =>split('@')で['testsample','gmail.com']と配列にする
+    # 「&.」ぼっち演算子という
+    profile&.nickname || self.email.split('@').first
+    # ↓を一行にまとめると↑になる
+    # if profile && profile.nickname
+    #   # profileが保存されていて、かつnicknameも保存されているとき
+    #   profile.nickname
+    # else
+    #   self.email.split('@').first
+    #   # =>split('@')で['testsample','gmail.com']と配列にする
+    # end
+  end
+
+  def birthday
+    profile&.birthday
+  end
+
+  def gender
+    profile&.gender
   end
 
   def prepare_profile
