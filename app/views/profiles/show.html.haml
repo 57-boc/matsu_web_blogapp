@@ -5,7 +5,8 @@
     .profilePage_user_basicInfo
       .profilePage_user_name
         .profilePage_user_displayName
-          #{current_user.display_name}(#{current_user.age} :#{current_user.gender})
+          #{current_user.display_name}(#{current_user.age} :#{I18n.t("enum.genders.#{current_user.gender}")})
+          -# I18n.t("enum.genders.female") 多言語化localesの中のenumのgendersで定義した言葉で置き換える
         .profilePage_user_actionButton
           = link_to 'Edit', edit_profile_path
       .profilePage_user_introduction

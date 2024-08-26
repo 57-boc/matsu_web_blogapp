@@ -16,7 +16,10 @@
     %div
       = f.label :gender, '性別'
     %div
-      = f.select :gender, Profile.genders.keys, {}, {class: 'text'}
+      -# [['男性', 'male'],['女性', 'female']]とかくと男性、女性のセレクタができ、valueにmale、femaleが入る
+      -# mapを使って配列を作りなおすProfile.genders.map{|k, v| [I18n.t("enum.genders.#{k}"), k]}
+      = f.select :gender, Profile.genders.map{|k, v| [I18n.t("enum.genders.#{k}"), k]}, {}, {class: 'text'}
+      -# = f.select :gender, Profile.genders.keys, {}, {class: 'text'}
       -# profile.rbで定義しているハッシュからkeyの配列をとってくる
       -# selectにclass（第4引数という決まり）を付けるときは1つ空を渡さないといけない
     %div

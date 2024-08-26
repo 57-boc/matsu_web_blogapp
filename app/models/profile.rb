@@ -18,7 +18,7 @@
 #
 class Profile < ApplicationRecord
   enum gender: {male: 0, female: 1, other: 2}
-  # genderの中身を定義する（入力値が0だったらmaleとする）
+  # enumでgenderの中身を定義する（入力値が0だったらmaleとする）
   belongs_to :user
   # Userモデルに紐づいている
 
