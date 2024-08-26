@@ -21,6 +21,8 @@ class Profile < ApplicationRecord
   # enumでgenderの中身を定義する（入力値が0だったらmaleとする）
   belongs_to :user
   # Userモデルに紐づいている
+  has_one_attached :avatar
+  # アバター用の画像を設定できるようにする Profileにavatarという画像との紐づきを追加出来る
 
   def age
     return '不明' unless birthday.present?
