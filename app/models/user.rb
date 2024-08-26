@@ -30,6 +30,8 @@ class User < ApplicationRecord
   # Userが1つのprofileを持っている
   # dependent: :destroy Userが削除されたときにUserのprofileも削除する
 
+  delegate :birthday, :gender, to: :profile, allow_nil: true
+
   def has_written?(article)
     articles.exists?(id: article.id)
     # current_user.articles.exists?でuserのarticleのなかに、このidの記事が存在するかチェック
@@ -49,13 +51,15 @@ class User < ApplicationRecord
     # end
   end
 
-  def birthday
-    profile&.birthday
-  end
 
-  def gender
-    profile&.gender
-  end
+  # delegate :birthday, :gender, to: :profile, allow_nil: true を↑で定義したので↓は必要なくなった
+  # def birthday
+  #   profile&.birthday
+  # end
+
+  # def gender
+  #   profile&.gender
+  # end
 
   def prepare_profile
     profile || build_profile
