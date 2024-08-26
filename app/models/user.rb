@@ -26,6 +26,12 @@ class User < ApplicationRecord
   # Userがarticles(複数のArticleモデル)を持っている
   # dependent: :destroy Userが削除されたときにUserのarticlesも削除する
 
+  has_one :profile, dependent: :destroy
+  # Userが1つのprofileを持っている
+  # dependent: :destroy Userが削除されたときにUserのprofileも削除する
+
+  delegate :birthday, :age, :gender, to: :profile, allow_nil: true
+
   def has_written?(article)
     articles.exists?(id: article.id)
     # current_user.articles.exists?でuserのarticleのなかに、このidの記事が存在するかチェック
@@ -33,7 +39,38 @@ class User < ApplicationRecord
 
   # testsample@gmail.comがユーザのメールアドレスだった時
   def display_name
-    self.email.split('@').first
-    # =>split('@')で['testsample','gmail.com']と配列にする
+    # 「&.」ぼっち演算子という
+    profile&.nickname || self.email.split('@').first
+    # ↓を一行にまとめると↑になる
+    # if profile && profile.nickname
+    #   # profileが保存されていて、かつnicknameも保存されているとき
+    #   profile.nickname
+    # else
+    #   self.email.split('@').first
+    #   # =>split('@')で['testsample','gmail.com']と配列にする
+    # end
+  end
+
+
+  # delegate :birthday, :gender, to: :profile, allow_nil: true を↑で定義したので↓は必要なくなった
+  # def birthday
+  #   profile&.birthday
+  # end
+
+  # def gender
+  #   profile&.gender
+  # end
+
+  def prepare_profile
+    profile || build_profile
+  end
+
+  def avatar_image
+    if profile&.avatar&.attached?
+      # &.attached?で画像がアップロードされているか調べる
+      profile.avatar
+    else
+      'default-avatar.png'
+    end
   end
 end
