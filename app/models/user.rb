@@ -40,4 +40,8 @@ class User < ApplicationRecord
     self.email.split('@').first
     # =>split('@')で['testsample','gmail.com']と配列にする
   end
+
+  def prepare_profile
+    profile || build_profile
+  end
 end
