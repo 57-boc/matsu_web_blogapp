@@ -30,7 +30,7 @@ class User < ApplicationRecord
   # Userが1つのprofileを持っている
   # dependent: :destroy Userが削除されたときにUserのprofileも削除する
 
-  delegate :birthday, :gender, to: :profile, allow_nil: true
+  delegate :birthday, :age, :gender, to: :profile, allow_nil: true
 
   def has_written?(article)
     articles.exists?(id: article.id)

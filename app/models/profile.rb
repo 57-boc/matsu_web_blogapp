@@ -21,4 +21,17 @@ class Profile < ApplicationRecord
   # genderの中身を定義する（入力値が0だったらmaleとする）
   belongs_to :user
   # Userモデルに紐づいている
+
+  def age
+    return '不明' unless birthday.present?
+    # 誕生日が入力されてない場合「不明」と返す
+    years = Time.zone.now.year - birthday.year
+    days = Time.zone.now.yday - birthday.yday
+    # ydayは1月1日から何日たったか
+    if days < 0
+      "#{years - 1}歳"
+    else
+      "#{years}歳"
+    end
+  end
 end
