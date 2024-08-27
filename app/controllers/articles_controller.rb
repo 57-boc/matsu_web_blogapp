@@ -81,8 +81,8 @@ class ArticlesController < ApplicationController
   # class Articleを更新するので名前はarticle_paramsとする決まり
   private
   def article_params
-    params.require(:article).permit(:title, :content)
-    # article（必須）を受け取ったときtitleとcontentだけを保存する
+    params.require(:article).permit(:title, :content, :eyecatch)
+    # article（必須）を受け取ったときtitleとcontentとeyecatchだけを保存する
   end
 
   def set_artivcle

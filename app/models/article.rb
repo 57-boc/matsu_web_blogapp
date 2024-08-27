@@ -14,6 +14,9 @@
 #  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
+  has_one_attached :eyecatch
+  # アイキャッチ用の画像を設定できるようにする Articleにeyecatchという画像との紐づきを追加出来る
+
   validates :title, presence: true
   # validates titleの入力チェック presence: true(入力必須)
   validates :title, length: {minimum: 2, maximum: 100}

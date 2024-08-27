@@ -1,8 +1,10 @@
 = link_to article_path(article) do
   / id: article.id は articleに省略可
   .card
-    .card_image
-      = image_tag 'eyecatch1.png'
+    - if article.eyecatch.attached?
+      -# articleにeyecatchが保存されているとき
+      .card_image
+        = image_tag article.eyecatch
     .card_content
       .card_title
         = article.title
