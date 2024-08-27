@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :comments, only: [:new, :create]
+    # 記事にコメントを付ける
+
+    resource :like, only: [:create]
+    # 記事にいいねを付ける
+    # 特定の記事に対して付けられるいいねは1つなので単数形
+    # レコードを作成するので:createを使う
   end
   # articlesそれぞれにcomments作成用のURLを作る
 
