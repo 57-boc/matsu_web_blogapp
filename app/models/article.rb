@@ -49,6 +49,11 @@ class Article < ApplicationRecord
     user.display_name
   end
 
+  def like_count
+    likes.count
+    # countはActiveRecordの機能 数を数えてくれる(ないときは0が返ってくる)
+  end
+
   private
   def validate_title_and_content_length
     char_count = self.title.length + self.content.length
