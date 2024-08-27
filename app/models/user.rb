@@ -26,6 +26,10 @@ class User < ApplicationRecord
   # Userがarticles(複数のArticleモデル)を持っている
   # dependent: :destroy Userが削除されたときにUserのarticlesも削除する
 
+  has_many :likes, dependent: :destroy
+  # Userがlikes(複数のLikeモデル)を持っている
+  # dependent: :destroy Userが削除されたときにUserのlikesも削除する
+
   has_one :profile, dependent: :destroy
   # Userが1つのprofileを持っている
   # dependent: :destroy Userが削除されたときにUserのprofileも削除する

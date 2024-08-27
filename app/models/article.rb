@@ -30,6 +30,11 @@ class Article < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   # articleは複数のcommentを持っている dependent: :destroyはarticleが削除されたときcommentsも消える
+
+  has_many :likes, dependent: :destroy
+  # Articleがlikes(複数のLikeモデル)を持っている
+  # dependent: :destroy Userが削除されたときにUserのlikesも削除する
+
   belongs_to :user
   # Userモデルに紐づいている
 
