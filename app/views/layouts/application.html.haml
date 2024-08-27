@@ -18,8 +18,9 @@
           / current_page（今いるページ）がrootじゃなかったら
           = link_to :back do
             = image_tag 'back.svg', class: 'header_back'
-        %p.header_pageTitle BlogApp
-        / /.header_pageTitle
+        %p.header_pageTitle
+          =link_to 'BlogApp', root_path
+          -# BlogAppを押したらホームへ戻る
       - if user_signed_in?
         //ユーザーがサインインしていたら
         .dropdown
