@@ -14,6 +14,9 @@
 #  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
+  has_one_attached :eyecatch
+  # アイキャッチ用の画像を設定できるようにする Articleにeyecatchという画像との紐づきを追加出来る
+
   validates :title, presence: true
   # validates titleの入力チェック presence: true(入力必須)
   validates :title, length: {minimum: 2, maximum: 100}
@@ -30,6 +33,11 @@ class Article < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   # articleは複数のcommentを持っている dependent: :destroyはarticleが削除されたときcommentsも消える
+
+  has_many :likes, dependent: :destroy
+  # Articleがlikes(複数のLikeモデル)を持っている
+  # dependent: :destroy Userが削除されたときにUserのlikesも削除する
+
   belongs_to :user
   # Userモデルに紐づいている
 
@@ -42,6 +50,11 @@ class Article < ApplicationRecord
 
   def author_name
     user.display_name
+  end
+
+  def like_count
+    likes.count
+    # countはActiveRecordの機能 数を数えてくれる(ないときは0が返ってくる)
   end
 
   private

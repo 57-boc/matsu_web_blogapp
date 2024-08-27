@@ -6,6 +6,10 @@
   = form_with(model: article, local: true) do |f|
     / formで 空の@articleの中に入力値を入れ、articles_pathにpostリクエストを送る
     %div
+      = f.label :eyecatch, 'アイキャッチ'
+    %div
+      = f.file_field :eyecatch
+    %div
       = f.label :title, 'タイトル'
     %div
       = f.text_field :title, class: 'text'

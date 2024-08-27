@@ -26,6 +26,14 @@ class User < ApplicationRecord
   # Userがarticles(複数のArticleモデル)を持っている
   # dependent: :destroy Userが削除されたときにUserのarticlesも削除する
 
+  has_many :likes, dependent: :destroy
+  # Userがlikes(複数のLikeモデル)を持っている
+  # dependent: :destroy Userが削除されたときにUserのlikesも削除する
+
+  has_many :favorite_articles, through: :likes, source: :article
+  # favorite_articlesはlikesの情報をもとにしてarticleを取ってくる
+  # favorite_articlesはarticleですよとsource: :articleで表現している(favoritesモデルでもfavoritesデータベースでもない)
+
   has_one :profile, dependent: :destroy
   # Userが1つのprofileを持っている
   # dependent: :destroy Userが削除されたときにUserのprofileも削除する
@@ -35,6 +43,11 @@ class User < ApplicationRecord
   def has_written?(article)
     articles.exists?(id: article.id)
     # current_user.articles.exists?でuserのarticleのなかに、このidの記事が存在するかチェック
+  end
+
+  def has_liked?(article)
+    likes.exists?(article_id: article.id)
+    # current_user.likes.exists?でuserのlikesのなかに、このidの記事が存在するかチェック
   end
 
   # testsample@gmail.comがユーザのメールアドレスだった時
