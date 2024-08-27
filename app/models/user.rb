@@ -30,6 +30,10 @@ class User < ApplicationRecord
   # Userがlikes(複数のLikeモデル)を持っている
   # dependent: :destroy Userが削除されたときにUserのlikesも削除する
 
+  has_many :favorite_articles, through: :likes, source: :article
+  # favorite_articlesはlikesの情報をもとにしてarticleを取ってくる
+  # favorite_articlesはarticleですよとsource: :articleで表現している(favoritesモデルでもfavoritesデータベースでもない)
+
   has_one :profile, dependent: :destroy
   # Userが1つのprofileを持っている
   # dependent: :destroy Userが削除されたときにUserのprofileも削除する

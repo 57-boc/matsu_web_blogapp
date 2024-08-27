@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resource :profile, only: [:show, :edit, :update]
   # profileは単数なのでindexは生成されない
 
+  resources :favorites, only: [:index]
+
   # resources :articles
   # ↓全部使われているのでonlyを使う必要がない
   # resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
