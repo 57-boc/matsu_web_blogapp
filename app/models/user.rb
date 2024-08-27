@@ -41,6 +41,11 @@ class User < ApplicationRecord
     # current_user.articles.exists?でuserのarticleのなかに、このidの記事が存在するかチェック
   end
 
+  def has_liked?(article)
+    likes.exists?(article_id: article.id)
+    # current_user.likes.exists?でuserのlikesのなかに、このidの記事が存在するかチェック
+  end
+
   # testsample@gmail.comがユーザのメールアドレスだった時
   def display_name
     # 「&.」ぼっち演算子という
