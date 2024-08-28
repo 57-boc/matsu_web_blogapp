@@ -36,6 +36,8 @@ gem 'better_errors'
 gem 'binding_of_caller'
 # ログイン機能
 gem 'devise'
+# AWSとの連携
+gem 'aws-sdk-s3', require: false
 
 
 # Use Active Storage variant
