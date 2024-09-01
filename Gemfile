@@ -55,6 +55,8 @@ group :development, :test do
   gem 'pry-byebug'
   # 文法チェックツール
   gem 'rubocop-rails'
+  # .envを使う
+  gem 'dotenv-rails'
 
 end
 
