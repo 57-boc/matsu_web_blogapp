@@ -36,6 +36,9 @@ gem 'better_errors'
 gem 'binding_of_caller'
 # ログイン機能
 gem 'devise'
+# AWSとの連携
+gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-core'
 
 
 # Use Active Storage variant
@@ -51,7 +54,8 @@ group :development, :test do
   gem 'pry-byebug'
   # 文法チェックツール
   gem 'rubocop-rails'
-
+  # 環境変数
+  gem 'dotenv-rails'
 end
 
 group :development do
