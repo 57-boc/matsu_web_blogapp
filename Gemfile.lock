@@ -306,7 +306,10 @@ PLATFORMS
 DEPENDENCIES
   annotate
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/master
   aws-sdk-core
   aws-sdk-s3
 >>>>>>> 8fca4d4 (aws-sdk-core を追加 (+1 squashed commits))
