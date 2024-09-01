@@ -9,7 +9,9 @@ gem 'ffi', '~> 1.15.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.6', '>= 6.0.6.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.6.9'
+# gem 'sqlite3', '~> 1.4'
+# PosgreSQLのインストール
+gem 'pg', '1.5.5'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -55,6 +57,8 @@ group :development, :test do
   gem 'pry-byebug'
   # 文法チェックツール
   gem 'rubocop-rails'
+  # .envを使う
+  gem 'dotenv-rails'
 
 end
 
