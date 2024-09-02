@@ -13,6 +13,5 @@
   }, {
     "url": "heroku/ruby"
   }],
-  
   "stack": "heroku-20"
 }
