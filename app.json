@@ -13,8 +13,5 @@
   }, {
     "url": "heroku/ruby"
   }],
-  "stack": "heroku-20",
-  "engines": {
-    "node": "20.x"
-  }
+  "stack": "heroku-20"
 }
