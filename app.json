@@ -12,5 +12,6 @@
     "url": "heroku/nodejs"
   }, {
     "url": "heroku/ruby"
-  }]
+  }],
+  "stack": "heroku-20"
 }
