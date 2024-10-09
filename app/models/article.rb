@@ -3,7 +3,6 @@
 # Table name: articles
 #
 #  id         :bigint           not null, primary key
-#  content    :text             not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -16,6 +15,7 @@
 class Article < ApplicationRecord
   has_one_attached :eyecatch
   # アイキャッチ用の画像を設定できるようにする Articleにeyecatchという画像との紐づきを追加出来る
+  has_rich_text :content
 
   validates :title, presence: true
   # validates titleの入力チェック presence: true(入力必須)
