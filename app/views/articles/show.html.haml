@@ -5,7 +5,8 @@
       = image_tag @article.eyecatch
   %h1.article_title= @article.title
   .article_detail
-    = image_tag @article.user.avatar_image
+    = link_to account_path(@article.user) do
+      = image_tag @article.user.avatar_image
     %div
       -# - if @article.user.present?
         -# @articleでuser情報があるとき=>完全に存在するように設定しなおしたので不要
