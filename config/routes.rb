@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   end
   # articlesそれぞれにcomments作成用のURLを作る
 
-  resources :accounts, only: [:show]
+  resources :accounts, only: [:show] do
+    resources :follows, only: [:create]
+  end
+
 
   resource :profile, only: [:show, :edit, :update]
   # profileは単数なのでindexは生成されない
