@@ -40,6 +40,8 @@ class User < ApplicationRecord
   # followingsはfollowing_relationshipsの情報をもとにしてfollowingを取ってくる
   # followingsはfollowingですよとsource: :followingで表現している(followingモデルでもfollowingデータベースでもない)
 
+  has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followers, through: :follower_relationships, source: :follower
 
   has_one :profile, dependent: :destroy
   # Userが1つのprofileを持っている
@@ -82,7 +84,13 @@ class User < ApplicationRecord
   # end
 
   def follow!(user)
+    # follow!で！が付いているのは例外処理があることを示している
     following_relationships.create!(following_id: user.id)
+  end
+
+  def unfollow!(user)
+    relation = following_relationships.find_by!(following_id: user.id)
+    relation.destroy!
   end
 
   def prepare_profile
