@@ -34,6 +34,13 @@ class User < ApplicationRecord
   # favorite_articlesはlikesの情報をもとにしてarticleを取ってくる
   # favorite_articlesはarticleですよとsource: :articleで表現している(favoritesモデルでもfavoritesデータベースでもない)
 
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  # 自分がフォローしている人のリスト foreign_keyが外部キーを表している class_name: 'Relationship'でどのモデルを参考にしているか表している
+  has_many :followings, through: :following_relationships, source: :following
+  # followingsはfollowing_relationshipsの情報をもとにしてfollowingを取ってくる
+  # followingsはfollowingですよとsource: :followingで表現している(followingモデルでもfollowingデータベースでもない)
+
+
   has_one :profile, dependent: :destroy
   # Userが1つのprofileを持っている
   # dependent: :destroy Userが削除されたときにUserのprofileも削除する
@@ -73,6 +80,10 @@ class User < ApplicationRecord
   # def gender
   #   profile&.gender
   # end
+
+  def follow!(user)
+    following_relationships.create!(following_id: user.id)
+  end
 
   def prepare_profile
     profile || build_profile
