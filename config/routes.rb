@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # rootを articles#indexにしろということ
 
+  resource :timeline, only: [:show]
+
   resources :articles do
     resources :comments, only: [:new, :create]
     # 記事にコメントを付ける
