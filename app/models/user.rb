@@ -59,21 +59,6 @@ class User < ApplicationRecord
     # current_user.likes.exists?でuserのlikesのなかに、このidの記事が存在するかチェック
   end
 
-  # testsample@gmail.comがユーザのメールアドレスだった時
-  def display_name
-    # 「&.」ぼっち演算子という
-    profile&.nickname || self.email.split('@').first
-    # ↓を一行にまとめると↑になる
-    # if profile && profile.nickname
-    #   # profileが保存されていて、かつnicknameも保存されているとき
-    #   profile.nickname
-    # else
-    #   self.email.split('@').first
-    #   # =>split('@')で['testsample','gmail.com']と配列にする
-    # end
-  end
-
-
   # delegate :birthday, :gender, to: :profile, allow_nil: true を↑で定義したので↓は必要なくなった
   # def birthday
   #   profile&.birthday
@@ -103,14 +88,7 @@ class User < ApplicationRecord
     profile || build_profile
   end
 
-  def avatar_image
-    if profile&.avatar&.attached?
-      # &.attached?で画像がアップロードされているか調べる
-      profile.avatar
-    else
-      'default-avatar.png'
-    end
-  end
+  
 
   private
   def get_user_id(user)

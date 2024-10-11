@@ -44,6 +44,8 @@ gem 'devise'
 # AWSとの連携
 gem 'aws-sdk-s3', require: false
 gem 'aws-sdk-core'
+# ActiveDecorator
+gem 'active_decorator'
 
 
 
