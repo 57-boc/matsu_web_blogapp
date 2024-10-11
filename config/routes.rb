@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # rootを articles#indexにしろということ
 
+  resource :timeline, only: [:show]
+
   resources :articles do
     resources :comments, only: [:new, :create]
     # 記事にコメントを付ける
@@ -14,6 +16,12 @@ Rails.application.routes.draw do
     # レコードを作成するので:createを使う
   end
   # articlesそれぞれにcomments作成用のURLを作る
+
+  resources :accounts, only: [:show] do
+    resources :follows, only: [:create]
+    resources :unfollows, only: [:create]
+  end
+
 
   resource :profile, only: [:show, :edit, :update]
   # profileは単数なのでindexは生成されない

@@ -1,0 +1,10 @@
+.container
+  = render 'commons/tabs'
+  - articles.each do |article|
+    = render 'commons/article', article: article
+    / commonsフォルダ内の_article.html.erbのarticleにarticleをいれなさい
+  = link_to new_article_path do
+    .float_btn
+      %i.fa.fa-plus
+      / /.fa-plus
+    / /.float_btn
