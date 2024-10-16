@@ -14,8 +14,12 @@ class LikesController < ApplicationController
     # いいねをつけたい記事を探してくる
     article.likes.create!(user_id: current_user.id)
     # 今のユーザのいいねをつける
-    redirect_to article_path(article)
+    # redirect_to article_path(article)
     # いいねをつけた記事に移動
+
+    render json: { status: 'ok'}
+    # jsonでステータスを管理する
+
   end
 
   def destroy
@@ -24,6 +28,10 @@ class LikesController < ApplicationController
     # この記事のいいねから今のユーザーがいるか探す
     # find_by! destroyするときは絶対いいねされているはずなので!を付けれる
     like.destroy!
-    redirect_to article_path(article)
+    # redirect_to article_path(article)
+
+    render json: { status: 'ok'}
+    # jsonでステータスを管理する
+
   end
 end
