@@ -29,6 +29,12 @@ document.addEventListener("turbolinks:load", () => {
       });
     })
 
+  // コメント投稿フォームを表示する
+  $(".show-comment-form").on("click", () => {
+    $(".show-comment-form").addClass("hidden");
+    $(".comment-text-area").removeClass("hidden");
+  });
+
   // ハートを表示する
   axios.get(`/articles/${articleId}/like`).then((response) => {
     const hasLiked = response.data.hasLiked;
