@@ -32,32 +32,37 @@ document.addEventListener("turbolinks:load", () => {
   const articleId = dataset.articleId;
 
   // コメントの取得と表示
-  axios.get(`/articles/${articleId}/comments`).then((response) => {
-    const comments = response.data;
-    comments.forEach((comment) => {
-      appendNewComment(comment);
+  axios
+    .get(`/articles/${articleId}/comments`)
+    .then((response) => {
+      const comments = response.data;
+      comments.forEach((comment) => {
+        appendNewComment(comment);
+      });
+    })
+    .catch((e) => {
+      window.alert("Error");
+      console.log(e);
     });
-  });
 
   handleContactForm();
-
 
   // コメント投稿ボタンが押されたらformの値を投稿する
   $(".add-comment-button").on("click", () => {
     const content = $("#comment_content").val();
     if (!content) {
-      window.alert('コメントを入力してください')
-    }
-    else {
-      axios.post(`/articles/${articleId}/comments`, {
-        comment: { content: content }
-        // comment_paramsで指定されている形式にする
-      })
-      .then((res) => {
-        const comment = res.data
-        appendNewComment(comment);
-        $("#comment_content").val('');
-      })
+      window.alert("コメントを入力してください");
+    } else {
+      axios
+        .post(`/articles/${articleId}/comments`, {
+          comment: { content: content },
+          // comment_paramsで指定されている形式にする
+        })
+        .then((res) => {
+          const comment = res.data;
+          appendNewComment(comment);
+          $("#comment_content").val("");
+        });
     }
   });
 
