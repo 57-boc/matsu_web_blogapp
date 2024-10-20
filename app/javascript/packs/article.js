@@ -4,6 +4,7 @@ import { csrfToken } from "rails-ujs";
 
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 
+// ハートの表示を切り替える
 const handleHeartDisplay = (hasLiked) => {
   if (hasLiked) {
     $(".active-heart").removeClass("hidden");
@@ -12,15 +13,29 @@ const handleHeartDisplay = (hasLiked) => {
   }
 };
 
+// articleのshowが表示されたときの挙動
 document.addEventListener("turbolinks:load", () => {
   const dataset = $("#article-show").data();
   const articleId = dataset.articleId;
 
+  // コメントの取得と表示
+  axios.get(`/articles/${articleId}/comments`)
+    .then((response) => {
+      const comments = response.data
+      comments.forEach((comment) => {
+        $('.comments-container').append(
+          `<div class="article_comment"><p>${comment.content}</p></div>`
+        )
+      });
+    })
+
+  // ハートを表示する
   axios.get(`/articles/${articleId}/like`).then((response) => {
     const hasLiked = response.data.hasLiked;
     handleHeartDisplay(hasLiked);
   });
 
+  // ハートがクリックされたら状態を変更する
   $(".inactive-heart").on("click", () => {
     axios
       .post(`/articles/${articleId}/like`)
