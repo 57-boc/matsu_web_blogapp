@@ -13,6 +13,19 @@ const handleHeartDisplay = (hasLiked) => {
   }
 };
 
+const handleContactForm = () => {
+  // コメント投稿フォームを表示する
+  $(".show-comment-form").on("click", () => {
+    $(".show-comment-form").addClass("hidden");
+    $(".comment-text-area").removeClass("hidden");
+  });
+}
+
+// コメントを表示する
+const appendNewComment = (comment) => {
+  $(".comments-container").append(`<div class="article_comment"><p>${comment.content}</p></div>`);
+}
+
 // articleのshowが表示されたときの挙動
 document.addEventListener("turbolinks:load", () => {
   const dataset = $("#article-show").data();
@@ -22,15 +35,12 @@ document.addEventListener("turbolinks:load", () => {
   axios.get(`/articles/${articleId}/comments`).then((response) => {
     const comments = response.data;
     comments.forEach((comment) => {
-      $(".comments-container").append(`<div class="article_comment"><p>${comment.content}</p></div>`);
+      appendNewComment(comment);
     });
   });
 
-  // コメント投稿フォームを表示する
-  $(".show-comment-form").on("click", () => {
-    $(".show-comment-form").addClass("hidden");
-    $(".comment-text-area").removeClass("hidden");
-  });
+  handleContactForm();
+
 
   // コメント投稿ボタンが押されたらformの値を投稿する
   $(".add-comment-button").on("click", () => {
@@ -45,7 +55,7 @@ document.addEventListener("turbolinks:load", () => {
       })
       .then((res) => {
         const comment = res.data
-        $(".comments-container").append(`<div class="article_comment"><p>${comment.content}</p></div>`);
+        appendNewComment(comment);
         $("#comment_content").val('');
       })
     }
