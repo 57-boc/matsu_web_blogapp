@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resource :timeline, only: [:show]
 
   resources :articles do
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:index, :new, :create]
     # 記事にコメントを付ける
 
     resource :like, only: [:show, :create, :destroy]
