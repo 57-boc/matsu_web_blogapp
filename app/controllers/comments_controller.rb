@@ -15,18 +15,22 @@ class CommentsController < ApplicationController
   def create
     article = Article.find(params[:article_id])
     @comment = article.comments.build(comment_params)
+    @comment.save!
 
-    if @comment.save
-      redirect_to article_path(article), notice: 'コメント保存できたよ'
-    else
-      flash.now[:error] = 'コメント保存に失敗しました'
-      render :new
-    end
+    render json: @comment
+
+    # if @comment.save
+    #   redirect_to article_path(article), notice: 'コメント保存できたよ'
+    # else
+    #   flash.now[:error] = 'コメント保存に失敗しました'
+    #   render :new
+    # end
   end
 
   private
   def comment_params
     params.require(:comment).permit(:content)
+    # {commnet: {content: 'aaaaaaa'}}という形式
   end
 
 end

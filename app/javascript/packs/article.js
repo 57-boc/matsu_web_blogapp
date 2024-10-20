@@ -19,20 +19,36 @@ document.addEventListener("turbolinks:load", () => {
   const articleId = dataset.articleId;
 
   // コメントの取得と表示
-  axios.get(`/articles/${articleId}/comments`)
-    .then((response) => {
-      const comments = response.data
-      comments.forEach((comment) => {
-        $('.comments-container').append(
-          `<div class="article_comment"><p>${comment.content}</p></div>`
-        )
-      });
-    })
+  axios.get(`/articles/${articleId}/comments`).then((response) => {
+    const comments = response.data;
+    comments.forEach((comment) => {
+      $(".comments-container").append(`<div class="article_comment"><p>${comment.content}</p></div>`);
+    });
+  });
 
   // コメント投稿フォームを表示する
   $(".show-comment-form").on("click", () => {
     $(".show-comment-form").addClass("hidden");
     $(".comment-text-area").removeClass("hidden");
+  });
+
+  // コメント投稿ボタンが押されたらformの値を投稿する
+  $(".add-comment-button").on("click", () => {
+    const content = $("#comment_content").val();
+    if (!content) {
+      window.alert('コメントを入力してください')
+    }
+    else {
+      axios.post(`/articles/${articleId}/comments`, {
+        comment: { content: content }
+        // comment_paramsで指定されている形式にする
+      })
+      .then((res) => {
+        const comment = res.data
+        $(".comments-container").append(`<div class="article_comment"><p>${comment.content}</p></div>`);
+        $("#comment_content").val('');
+      })
+    }
   });
 
   // ハートを表示する
