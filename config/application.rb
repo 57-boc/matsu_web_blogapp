@@ -25,5 +25,7 @@ module MatsuWebBlogApp
     config.i18n.default_locale = :ja
     # デフォルト言語を日本語にする
     # application.rbはサーバを立ち上げるときに読み込むので、変更したら再度サーバーを立ち上げる
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

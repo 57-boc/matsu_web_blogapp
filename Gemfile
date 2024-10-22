@@ -48,6 +48,8 @@ gem 'aws-sdk-core'
 gem 'active_decorator'
 # jsonにいい感じにして値を渡してくれる
 gem 'active_model_serializers'
+# 非同期処理のために必要
+gem 'sidekiq'
 
 
 
