@@ -1,4 +1,4 @@
-.article
+.article#article-show{data: {article_id: @article.id}}
   - if @article.eyecatch.attached?
     -# articleにeyecatchが保存されているとき
     .article_image
@@ -25,26 +25,24 @@
   .article_content
     = @article.content
   - if user_signed_in?
-    - if current_user.has_liked?(@article)
-      -# このユーザがこの記事にいいねしている場合
-      .article_heart
-        = link_to article_like_path(@article), data: {method: 'delete'} do
-          -# すでにいいねしていて、もう一度イイねボタン押された場合レコードをdeleteする
-          = image_tag 'heart-active.svg'
-    - else
-      .article_heart
-        = link_to article_like_path(@article), data: {method: 'post'} do
-          -# いいねレコードにこの記事を追加する
-          = image_tag 'heart.svg'
+    .article_heart.hidden.active-heart
+      = image_tag 'heart-active.svg'
+    .article_heart.hidden.inactive-heart
+      = image_tag 'heart.svg'
 
 .article
   %h2 コメント一覧
-  - @comments.each do |comment|
-    .article_comment
-      %p= comment.content
+  .comments-container
 
 .container
-  = link_to new_article_comment_path(@article) do
-    -# コメントのnew画面に遷移する（引数:articleを渡さないとどの記事がわからない）
-    .btn-secondary 
+  .btn-secondary.show-comment-form
+    コメントを追加
+  .comment-text-area.hidden
+    = text_area_tag :comment_content, '', class: 'sm'
+    -# ''は初期値を空欄にしている
+    .btn-secondary.add-comment-button
       コメントを追加
+
+
+-# article.jsを呼び出す
+= javascript_pack_tag 'article'

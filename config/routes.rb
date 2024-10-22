@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   resource :timeline, only: [:show]
 
   resources :articles do
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:index, :new, :create]
     # 記事にコメントを付ける
 
-    resource :like, only: [:create, :destroy]
+    resource :like, only: [:show, :create, :destroy]
     # 記事にいいねを付ける
     # 特定の記事に対して付けられるいいねは1つなので単数形
     # レコードを作成するので:createを使う

@@ -46,6 +46,8 @@ gem 'aws-sdk-s3', require: false
 gem 'aws-sdk-core'
 # ActiveDecorator
 gem 'active_decorator'
+# jsonにいい感じにして値を渡してくれる
+gem 'active_model_serializers'
 
 
 
