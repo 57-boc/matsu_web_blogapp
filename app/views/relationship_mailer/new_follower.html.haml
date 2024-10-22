@@ -1,4 +1,6 @@
 %p #{@user.email} さん
-%p 以下のユーザにふぉろーされました。
+%p 以下のユーザにフォローされました。
 
 = link_to 'プロフィールを確認する', account_url(@follower)
+-# _pathだと/users が送られてきて
+-# _urlだと http://localhost:3000/users が送られてくる
