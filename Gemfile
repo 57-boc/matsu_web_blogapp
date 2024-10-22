@@ -78,6 +78,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # haml変換用
   gem 'erb2haml'
+  # メールの内容の確認するため
+  gem 'letter_opener'
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :test do
