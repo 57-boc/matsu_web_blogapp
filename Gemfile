@@ -50,6 +50,8 @@ gem 'active_decorator'
 gem 'active_model_serializers'
 # 非同期処理のために必要
 gem 'sidekiq'
+# # foremanでredisを使用するため
+# gem 'net-http'
 
 
 
