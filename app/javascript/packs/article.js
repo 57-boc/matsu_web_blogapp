@@ -15,7 +15,7 @@ const handleHeartDisplay = (hasLiked) => {
   }
 };
 
-const handleContactForm = () => {
+const handleCommentForm = () => {
   // コメント投稿フォームを表示する
   $(".show-comment-form").on("click", () => {
     $(".show-comment-form").addClass("hidden");
