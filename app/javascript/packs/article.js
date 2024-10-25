@@ -47,7 +47,7 @@ document.addEventListener("turbolinks:load", () => {
       console.log(e);
     });
 
-  handleContactForm();
+  handleCommentForm();
 
   // コメント投稿ボタンが押されたらformの値を投稿する
   $(".add-comment-button").on("click", () => {
@@ -57,13 +57,13 @@ document.addEventListener("turbolinks:load", () => {
     } else {
       axios
         .post(`/articles/${articleId}/comments`, {
-          comment: { content: content },
+          comment: {content: content},
           // comment_paramsで指定されている形式にする
         })
         .then((res) => {
           const comment = res.data;
           appendNewComment(comment);
-          $("#comment_content").val("");
+          $("#comment_content").val('');
         });
     }
   });
@@ -74,7 +74,8 @@ document.addEventListener("turbolinks:load", () => {
     handleHeartDisplay(hasLiked);
   });
 
-  listenInactiveHeartEvent(articleId)
-  listenActiveHeartEvent(articleId)
+  listenInactiveHeartEvent(articleId);
+  listenActiveHeartEvent(articleId);
+
 });
 
