@@ -35,7 +35,7 @@ document.addEventListener("turbolinks:load", () => {
 
   // コメントの取得と表示
   axios
-    .get(`/articles/${articleId}/comments`)
+    .get(`/api/articles/${articleId}/comments`)
     .then((response) => {
       const comments = response.data;
       comments.forEach((comment) => {
@@ -56,7 +56,7 @@ document.addEventListener("turbolinks:load", () => {
       window.alert("コメントを入力してください");
     } else {
       axios
-        .post(`/articles/${articleId}/comments`, {
+        .post(`/api/articles/${articleId}/comments`, {
           comment: {content: content},
           // comment_paramsで指定されている形式にする
         })
@@ -69,7 +69,7 @@ document.addEventListener("turbolinks:load", () => {
   });
 
   // ハートを表示する
-  axios.get(`/articles/${articleId}/like`).then((response) => {
+  axios.get(`/api/articles/${articleId}/like`).then((response) => {
     const hasLiked = response.data.hasLiked;
     handleHeartDisplay(hasLiked);
   });
