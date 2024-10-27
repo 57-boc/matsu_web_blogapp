@@ -12,16 +12,9 @@ Rails.application.routes.draw do
 
   resource :timeline, only: [:show]
 
-  resources :articles do
-    resources :comments, only: [:index, :new, :create]
-    # 記事にコメントを付ける
-
-    resource :like, only: [:show, :create, :destroy]
-    # 記事にいいねを付ける
-    # 特定の記事に対して付けられるいいねは1つなので単数形
-    # レコードを作成するので:createを使う
-  end
+  resources :articles
   # articlesそれぞれにcomments作成用のURLを作る
+  # ->namespaceへ移動
 
   resources :accounts, only: [:show] do
     resources :follows, only: [:create]
@@ -42,5 +35,20 @@ Rails.application.routes.draw do
   # get '/about' => 'home#about'
   # ↑home#about はhome_controller.rbのaboutを実行しろということ
 
+  namespace :api, defaults: {format: :json} do
+    # amespaceでcontroller（のフォルダ構成）を書き換える
+    # defaults: {format: :json}でformatを常にjsonで返すことを指定
 
+    scope '/articles/:article_id' do
+      # scopeでurlを書き換える
+      resources :comments, only: [:index, :create]
+      # resources :comments, only: [:index, :new, :create]
+      # 記事にコメントを付ける
+
+      resource :like, only: [:show, :create, :destroy]
+      # 記事にいいねを付ける
+      # 特定の記事に対して付けられるいいねは1つなので単数形
+      # レコードを作成するので:createを使う
+    end
+  end
 end

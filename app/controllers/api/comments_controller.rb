@@ -1,10 +1,5 @@
-class CommentsController < ApplicationController
-  def new
-    article = Article.find(params[:article_id])
-    # コメントを付けたいarticleのarticle_idを持つ記事を探してくる
-    @comment = article.comments.build
-    # 探してきたarticleにコメントを入れる入れ物を作成
-  end
+# フォルダを作成したときApi::(foldername::)を付けるのが決まり
+class Api::CommentsController < Api::ApplicationController
 
   def index
     article = Article.find(params[:article_id])

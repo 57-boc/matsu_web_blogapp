@@ -68,3 +68,9 @@ yarn-debug.log*
 
 # Ignore redis binary dump (dump.rdb) files
 *.rdb
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
