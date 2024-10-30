@@ -25,12 +25,7 @@ const handleHeartDisplay = (hasLiked) => {
 };
 
 function initializeJS() {
-  if (event.type === "DOMContentLoaded") {
-    console.log("DOM");
-  }
-  else {
-    console.log("turbolinks:load");
-  }
+  console.log(event.type);
 
   const articleShow = $("#article-show");
   if (articleShow.length === 0) {
@@ -88,7 +83,7 @@ function initializeJS() {
   listenActiveHeartEvent(articleId);
 }
 
-document.addEventListener("DOMContentLoaded", initializeJS);
+// document.addEventListener("DOMContentLoaded", initializeJS);
 document.addEventListener("turbolinks:load", initializeJS);
 
 
