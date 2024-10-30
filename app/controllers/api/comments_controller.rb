@@ -3,7 +3,7 @@ class Api::CommentsController < Api::ApplicationController
 
   def index
     article = Article.find(params[:article_id])
-    comments = article.comments
+    comments = article.comments.order(:id)
     render json: comments
   end
 
