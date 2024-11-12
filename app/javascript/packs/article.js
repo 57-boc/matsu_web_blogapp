@@ -24,19 +24,10 @@ const handleHeartDisplay = (hasLiked) => {
   }
 };
 
-document.addEventListener("turbolinks:load", () => {
+
+document.addEventListener("DOMContentLoaded", function () {
   const articleShow = $("#article-show");
-  if (articleShow.length === 0) {
-    console.log("Article show element not found");
-    return;
-  }
-
   const dataset = articleShow.data();
-  if (!dataset || !dataset.articleId) {
-    console.log("Article ID not found in dataset");
-    return;
-  }
-
   const articleId = dataset.articleId;
 
   // コメントの取得と表示
@@ -51,9 +42,7 @@ document.addEventListener("turbolinks:load", () => {
     .catch((error) => {
       console.error("Error fetching comments:", error);
     });
-
   handleCommentForm();
-
   $(".add-comment-button")
     .off("click")
     .on("click", () => {
@@ -67,23 +56,19 @@ document.addEventListener("turbolinks:load", () => {
           })
           .then((res) => {
             const comment = res.data;
-            console.log(comment);
             appendNewComment(comment);
             $("#comment_content").val("");
-            console.log("ok");
           })
           .catch((error) => {
             console.error("コメント投稿エラー:", error);
           });
       }
     });
-
   // ハートを表示する
   axios.get(`/api/articles/${articleId}/like`).then((response) => {
     const hasLiked = response.data.hasLiked;
     handleHeartDisplay(hasLiked);
   });
-
   listenInactiveHeartEvent(articleId);
   listenActiveHeartEvent(articleId);
 });
