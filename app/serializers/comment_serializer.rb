@@ -13,5 +13,5 @@
 #  index_comments_on_article_id  (article_id)
 #
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :content, :created_at
+  attributes :id, :content
 end

@@ -24,20 +24,12 @@ const handleHeartDisplay = (hasLiked) => {
   }
 };
 
-function initializeJS() {
-  console.log(event.type);
 
+document.addEventListener("DOMContentLoaded", function () {
   const articleShow = $("#article-show");
-  if (articleShow.length === 0) {
-    console.log("Article show element not found");
-    return;
-  }
   const dataset = articleShow.data();
-  if (!dataset || !dataset.articleId) {
-    console.log("Article ID not found in dataset");
-    return;
-  }
   const articleId = dataset.articleId;
+
   // コメントの取得と表示
   axios
     .get(`/api/articles/${articleId}/comments`)
@@ -64,10 +56,8 @@ function initializeJS() {
           })
           .then((res) => {
             const comment = res.data;
-            console.log(comment);
             appendNewComment(comment);
             $("#comment_content").val("");
-            console.log("ok");
           })
           .catch((error) => {
             console.error("コメント投稿エラー:", error);
@@ -81,75 +71,4 @@ function initializeJS() {
   });
   listenInactiveHeartEvent(articleId);
   listenActiveHeartEvent(articleId);
-}
-
-// document.addEventListener("DOMContentLoaded", initializeJS);
-document.addEventListener("turbolinks:load", initializeJS);
-
-
-
-// document.addEventListener("turbolinks:load", () => {
-//   console.log("turbolinks:load");
-  
-//   const articleShow = $("#article-show");
-//   if (articleShow.length === 0) {
-//     console.log("Article show element not found");
-//     return;
-//   }
-
-//   const dataset = articleShow.data();
-//   if (!dataset || !dataset.articleId) {
-//     console.log("Article ID not found in dataset");
-//     return;
-//   }
-
-//   const articleId = dataset.articleId;
-
-//   // コメントの取得と表示
-//   axios
-//     .get(`/api/articles/${articleId}/comments`)
-//     .then((response) => {
-//       const comments = response.data;
-//       comments.forEach((comment) => {
-//         appendNewComment(comment);
-//       });
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching comments:", error);
-//     });
-
-//   handleCommentForm();
-
-//   $(".add-comment-button")
-//     .off("click")
-//     .on("click", () => {
-//       const content = $("#comment_content").val();
-//       if (!content) {
-//         window.alert("コメントを入力してください");
-//       } else {
-//         axios
-//           .post(`/api/articles/${articleId}/comments`, {
-//             comment: { content: content },
-//           })
-//           .then((res) => {
-//             const comment = res.data;
-//             console.log(comment);
-//             appendNewComment(comment);
-//             $("#comment_content").val("");
-//             console.log("ok");
-//           })
-//           .catch((error) => {
-//             console.error("コメント投稿エラー:", error);
-//           });
-//       }
-//     });
-
-//   // ハートを表示する
-//   axios.get(`/api/articles/${articleId}/like`).then((response) => {
-//     const hasLiked = response.data.hasLiked;
-//     handleHeartDisplay(hasLiked);
-//   });
-
-//   listenInactiveHeartEvent(articleId);
-//   listenActiveHeartEvent(articleId);
-// });
+});
