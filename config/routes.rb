@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # rootを articles#indexにしろということ
 
-  resource :timeline, only: [:show]
 
   resources :articles
   # articlesそれぞれにcomments作成用のURLを作る
@@ -22,11 +21,6 @@ Rails.application.routes.draw do
   end
 
 
-  resource :profile, only: [:show, :edit, :update]
-  # profileは単数なのでindexは生成されない
-
-  resources :favorites, only: [:index]
-
   # resources :articles
   # ↓全部使われているのでonlyを使う必要がない
   # resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
@@ -34,6 +28,15 @@ Rails.application.routes.draw do
 
   # get '/about' => 'home#about'
   # ↑home#about はhome_controller.rbのaboutを実行しろということ
+
+
+  scope module: :apps do
+    resources :favorites, only: [:index]
+    resource :timeline, only: [:show]
+    resource :profile, only: [:show, :edit, :update]
+    # profileは単数なのでindexは生成されない
+  end
+
 
   namespace :api, defaults: {format: :json} do
     # amespaceでcontroller（のフォルダ構成）を書き換える
