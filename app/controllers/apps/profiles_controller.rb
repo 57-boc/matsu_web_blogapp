@@ -1,7 +1,4 @@
-class ProfilesController < ApplicationController
-  # deviseが用意してくれているauthenticate_user!
-  before_action :authenticate_user!
-  # ログインしていないと機能を使えないようにする
+class Apps::ProfilesController < Apps::ApplicationController
 
   def show
     @profile = current_user.profile
