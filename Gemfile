@@ -70,6 +70,8 @@ group :development, :test do
   gem 'rubocop-rails'
   # .envを使う
   gem 'dotenv-rails'
+  # テストを行う
+  gem 'rspec-rails'
 
 end
 
