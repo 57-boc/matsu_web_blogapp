@@ -26,6 +26,7 @@ RSpec.describe 'Articles', type: :request do
         # redirect_toを使用していると302が返ってくる
         expect(Article.last.title).to eq(article_params[:title])
         expect(Article.last.content.body.to_plain_text).to eq(article_params[:content])
+        # ただのcontentではダメcontent.body.to_plain_textじゃないと内容にならない
       end
     end
 
