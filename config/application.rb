@@ -17,6 +17,11 @@ module MatsuWebBlogApp
       Dotenv::Railtie.load
     end
 
+    # SSL認証のため本番環境では使わない!!!
+    if Rails.env.test?
+      OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
@@ -29,3 +34,4 @@ module MatsuWebBlogApp
     config.active_job.queue_adapter = :sidekiq
   end
 end
+
