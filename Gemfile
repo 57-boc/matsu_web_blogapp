@@ -72,6 +72,8 @@ group :development, :test do
   gem 'dotenv-rails'
   # テストを行う
   gem 'rspec-rails'
+  # テストデータの作成
+  gem 'factory_bot_rails'
 
 end
 
