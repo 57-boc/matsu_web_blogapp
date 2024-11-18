@@ -8,7 +8,7 @@ RSpec.describe 'Article', type: :system do
     visit root_path
 
     article.each do |article|
-      expect(page).to have_content(article.title)
+      expect(page).to have_css('.card_title', text: article.title)
     end
   end
 end
